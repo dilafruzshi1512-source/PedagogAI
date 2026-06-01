@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --sidebar-width: 240px;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: #0c1222;
+  color: #f1f5f9;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.2);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.35);
+}
+
+::selection {
+  background: rgba(99, 102, 241, 0.35);
+  color: #fff;
+}
+
+@layer components {
+  .glass-card {
+    @apply rounded-2xl border border-glass-border backdrop-blur-card shadow-card;
+    background: linear-gradient(
+      145deg,
+      rgba(28, 45, 78, 0.45) 0%,
+      rgba(18, 28, 48, 0.35) 100%
+    );
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  }
+  .glass-card:hover {
+    @apply border-glass-border2 shadow-card-hover;
+  }
+
+  .glass-panel {
+    @apply rounded-2xl border border-glass-border backdrop-blur-card;
+    background: rgba(15, 23, 42, 0.35);
+  }
+
+  .btn-ai {
+    @apply relative overflow-hidden bg-gradient-brand text-white font-medium rounded-xl
+           px-4 py-2.5 text-sm flex items-center gap-2
+           transition-all duration-300 ease-out
+           hover:shadow-glow-purple hover:-translate-y-0.5
+           active:translate-y-0 active:shadow-soft
+           disabled:opacity-50 disabled:pointer-events-none disabled:transform-none;
+  }
+  .btn-ai::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+  }
+  .btn-ai:hover::before {
+    @apply opacity-100;
+  }
+
+  .btn-ghost {
+    @apply border border-glass-border rounded-xl text-sm text-content-secondary
+           px-4 py-2 transition-all duration-200 ease-out cursor-pointer
+           bg-glass hover:bg-glass-hover hover:border-glass-border2
+           hover:text-content-primary hover:shadow-soft;
+  }
+
+  .form-input {
+    @apply w-full rounded-xl px-3.5 py-3 text-sm text-content-primary font-sans
+           border border-glass-border transition-all duration-200
+           placeholder:text-content-muted
+           focus:outline-none focus:border-brand-purple/50 focus:ring-2 focus:ring-brand-purple/15;
+    background: rgba(15, 23, 42, 0.5);
+  }
+
+  .form-label {
+    @apply text-xs font-medium text-content-secondary mb-1.5 block tracking-wide;
+  }
+
+  .tag {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-medium border;
+  }
+  .tag-purple {
+    @apply text-brand-purple-faint border-brand-purple/25 bg-brand-purple/10;
+  }
+  .tag-cyan {
+    @apply text-brand-cyan-faint border-brand-cyan/25 bg-brand-cyan/10;
+  }
+  .tag-green {
+    @apply text-brand-green-light border-brand-green/25 bg-brand-green/10;
+  }
+  .tag-amber {
+    @apply text-brand-amber-light border-brand-amber/25 bg-brand-amber/10;
+  }
+  .tag-red {
+    @apply text-brand-red-light border-brand-red/25 bg-brand-red/10;
+  }
+
+  .section-title {
+    @apply text-[15px] font-semibold text-content-primary tracking-tight;
+  }
+
+  .page-title {
+    @apply font-display text-2xl font-bold tracking-tight text-content-primary;
+  }
+
+  .page-subtitle {
+    @apply text-content-secondary text-sm mt-1 font-normal;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs
+           bg-glass border border-glass-border text-content-secondary;
+  }
+
+  .ai-pulse {
+    @apply inline-flex items-center gap-2 px-3 py-2 rounded-xl text-[11px] font-medium
+           border border-brand-purple/20 text-brand-purple-faint;
+    background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(34,211,238,0.06));
+  }
+
+  .stat-value {
+    @apply font-display text-[28px] font-bold leading-none tracking-tight;
+  }
+
+  .stat-card {
+    @apply glass-card p-5 transition-all duration-300 hover:-translate-y-0.5;
+  }
+
+  .surface-item {
+    @apply p-4 rounded-xl border border-glass-border transition-colors duration-200;
+    background: rgba(15, 23, 42, 0.4);
+  }
+  .surface-item:hover {
+    @apply border-glass-border2;
+    background: rgba(22, 36, 62, 0.45);
+  }
+
+  .test-question-card {
+    @apply surface-item;
+  }
+  .test-question-card .answer-correct {
+    @apply text-brand-green-light font-medium;
+  }
+
+  .chat-bubble-ai {
+    @apply max-w-[80%] px-4 py-3 rounded-2xl rounded-bl-md text-sm whitespace-pre-wrap
+           text-content-primary border border-glass-border shadow-soft;
+    background: rgba(22, 36, 62, 0.5);
+  }
+
+  .chat-bubble-user {
+    @apply max-w-[80%] px-4 py-3 rounded-2xl rounded-br-md text-sm whitespace-pre-wrap
+           text-white shadow-glow-purple;
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 50%, #22d3ee 100%);
+  }
+
+  .chat-avatar-ai {
+    @apply w-9 h-9 rounded-xl shrink-0 flex items-center justify-center
+           border border-brand-purple/20 shadow-inner-soft;
+    background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(34,211,238,0.1));
+  }
+
+  .chat-avatar-user {
+    @apply w-9 h-9 rounded-xl shrink-0 flex items-center justify-center text-xs font-semibold
+           border border-brand-cyan/25 text-brand-cyan-faint;
+    background: rgba(34, 211, 238, 0.12);
+  }
+
+  .quick-link-card {
+    @apply glass-card p-5 transition-all duration-300
+           hover:-translate-y-1 hover:shadow-card-hover;
+  }
+
+  .nav-active-indicator {
+    @apply absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-[55%] rounded-full;
+    background: linear-gradient(180deg, #818cf8, #22d3ee);
+    box-shadow: 0 0 12px rgba(99, 102, 241, 0.5);
+  }
+
+  .orb {
+    @apply fixed rounded-full pointer-events-none z-0;
+    filter: blur(100px);
+    opacity: 0.35;
+  }
+}
